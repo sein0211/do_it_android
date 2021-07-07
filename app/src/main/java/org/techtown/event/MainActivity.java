@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -85,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    /**
+     * key 이벤트
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) { //key가 눌렸을 때 자동으로 호출됨
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            println("시스템 [BACK]버튼이 눌렸습니다.");
+            return true;
+        }
+        return false;
     }
 
     public void println(String data){ // textView에 출력하는 함수
