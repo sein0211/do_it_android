@@ -3,6 +3,7 @@ package org.techtown.event;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView); // 화면에 있는 textView(3) 불러오기
         View view = findViewById(R.id.view); // 화면에 있는 view(1) 불러오기
 
-        view.setOnTouchListener(new View.OnTouchListener() { //view에 발생하는 touch 이벤트를 감지하는 함수
+        view.setOnTouchListener(new View.OnTouchListener() { // view에 발생하는 touch 이벤트를 감지하는 함수
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -38,9 +39,55 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        /**
+         *  GestureDetector
+         */
+        GestureDetector detector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) { // 클릭했을 시
+                println("onDown 호출됨");
+                return true;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) { // 오래 눌렸을 시
+                println("onLongPress 호출됨");
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) { // 누른채로 움직였을 시
+                println("onFling 호출됨 : " + velocityX + ", " + velocityY);
+                return true;
+            }
+        });
+
+        View view2 = findViewById(R.id.view2); // 화면에 있는 view2 불러오기
+        view2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                detector.onTouchEvent(event);
+                return true;
+            }
+        });
     }
 
-    public void println(String data){ //출력하는 함수
+    public void println(String data){ // textView에 출력하는 함수
         textView.append(data + "\n");
     }
 
