@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = findViewById(R.id.textView); // 화면에 있는 textView(3) 불러오기
-        View view = findViewById(R.id.view); //화면에 있는 view(1) 불러오기
+        View view = findViewById(R.id.view); // 화면에 있는 view(1) 불러오기
 
         view.setOnTouchListener(new View.OnTouchListener() { //view에 발생하는 touch 이벤트를 감지하는 함수
             @Override
